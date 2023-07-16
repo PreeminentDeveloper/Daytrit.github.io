@@ -54,7 +54,7 @@ class _ShopScreenState extends State<ShopScreen> {
               addVerticalSpace(15),
               InkWell(
                 onTap: () async {
-                  const urlPreview = "https://daytrit.com/#download";
+                  const urlPreview = "https://daytrit.app";
                   await Share.share(
                       "Experience thrilling adventures and enjoy abundant rewards with the DayTrit app! By using my referral link, you'll earn a whopping 500 trit coins when you download the app and create an account. Start your journey now! \n\n$urlPreview\n\nMy Referral code is ${profileModel.uData!.referralCode}");
                 },

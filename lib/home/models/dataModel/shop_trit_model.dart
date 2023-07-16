@@ -21,7 +21,7 @@ List<ShopTritModel> shopTrit = [
       coinIcon: AppImages.coinIcon),
   ShopTritModel(
       qty: 3000,
-      amount: 3000,
+      amount: 5000,
       coinBoxImage: AppImages.coinBox,
       coinIcon: AppImages.coinIcon),
   ShopTritModel(

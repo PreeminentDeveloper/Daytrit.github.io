@@ -268,8 +268,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         context: context);
                                   } else if (e.contains("banner2")) {
                                     print("trit coins");
-                                    const urlPreview =
-                                        "https://daytrit.com/#download";
+                                    const urlPreview = "https://daytrit.app";
                                     await Share.share(
                                         "Experience thrilling adventures and enjoy abundant rewards with the DayTrit app! By using my referral link, you'll earn a whopping 500 trit coins when you download the app and create an account. Start your journey now! \n\n$urlPreview\n\nMy Referral code is ${profileModel.uData!.referralCode}");
                                   } else {
@@ -341,28 +340,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      children: [
-                        getText(
-                            context: context,
-                            title: "Recommendations",
-                            fontSize: 20,
-                            color: AppColours.black,
-                            weight: FontWeight.w600),
-                        Spacer(),
-                        InkWell(
-                          onTap: () => {},
-                          // openvendorContainerNav(context),
-                          child: getText(
-                              context: context,
-                              title: "see all",
-                              decoration: TextDecoration.underline,
-                              fontSize: 16,
-                              color: AppColours.red,
-                              weight: FontWeight.w400),
-                        ),
-                      ],
-                    ),
+                    getText(
+                        context: context,
+                        title: "Recommendations",
+                        fontSize: 20,
+                        color: AppColours.black,
+                        weight: FontWeight.w600),
                     SizedBox(
                       height: 5,
                     ),
