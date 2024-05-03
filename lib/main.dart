@@ -3,27 +3,35 @@ import 'package:daytrit/authentication/view_models/forgot_password_view_model.da
 import 'package:daytrit/authentication/view_models/login_view_model.dart';
 import 'package:daytrit/authentication/view_models/login_with_google_view_model.dart.dart';
 import 'package:daytrit/authentication/view_models/register_view_model.dart';
-import 'package:daytrit/authentication/view_models/validation_model.dart';
+import 'package:daytrit/authentication/view_models/validation_view_model.dart';
 import 'package:daytrit/authentication/view_models/verify_email_view_model.dart';
 import 'package:daytrit/authentication/views/login_screen.dart';
 import 'package:daytrit/authentication/views/onboarding/screens/onboarding_screen.dart';
 import 'package:daytrit/home/components/bottom_nav_bar/bottom_nav.dart';
+import 'package:daytrit/authentication/view_models/register_agent_view_model.dart';
+import 'package:daytrit/home/view/travel_agency/travel_dashboard.dart';
+import 'package:daytrit/home/view_models/add_travel_vendor_view_model.dart';
+import 'package:daytrit/home/view_models/agent_vendor_view_model.dart';
 import 'package:daytrit/home/view_models/delete_account_view_model.dart';
 import 'package:daytrit/home/view_models/delete_user_account_view_model.dart';
 import 'package:daytrit/home/view_models/earn_coin_reward_view_model.dart';
 import 'package:daytrit/home/view_models/earn_coin_view_model.dart';
 import 'package:daytrit/home/view_models/explore_view_model.dart';
 import 'package:daytrit/home/view_models/fetch_coin_view_model.dart';
+import 'package:daytrit/home/view_models/gallery_thumbnail_viewmodel.dart';
 import 'package:daytrit/home/view_models/notification_view_model.dart';
 import 'package:daytrit/home/view_models/purchase_coin_viewmodel.dart';
 import 'package:daytrit/home/view_models/purchase_trit_coin_viewmodel.dart';
 import 'package:daytrit/home/view_models/search_view_model.dart';
+import 'package:daytrit/home/view_models/status_view_model.dart';
+import 'package:daytrit/home/view_models/transaction_model.dart';
 import 'package:daytrit/home/view_models/userprofile_view_model.dart';
 import 'package:daytrit/services/auth_service.dart';
 import 'package:daytrit/utils/constants.dart';
 import 'package:daytrit/utils/navigation_utils.dart';
 import 'package:daytrit/vendor/view/view_models/vendor_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:provider/provider.dart';
@@ -39,27 +47,33 @@ void main() async {
   //when a user has onboarded that is  1
   AuthService.isOnBoarded = prefs.getInt("onBoarding") ?? 0;
   final bool isLoggedIn = await AuthService.getLoggedInUser();
+  final String role = await AuthService.getRole();
 
-  runApp(MyApp(isLoggedIn: isLoggedIn));
+  var formatter = NumberFormat('#,##,000');
+
+  runApp(MyApp(isLoggedIn: isLoggedIn, role: role));
 }
 
 class MyApp extends StatelessWidget {
   final bool isLoggedIn;
-  const MyApp({super.key, required this.isLoggedIn});
+  final String? role;
+  const MyApp({super.key, required this.isLoggedIn, this.role});
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    print("ROLE: $role");
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => RegisterViewModel()),
+        ChangeNotifierProvider(create: (_) => RegisterAgentViewModel()),
         ChangeNotifierProvider(create: (_) => VerifyEmailViewModel()),
         ChangeNotifierProvider(create: (_) => LoginViewModel()),
         ChangeNotifierProvider(create: (_) => ForgotPasswordViewModel()),
         ChangeNotifierProvider(create: (_) => NewPasswordViewModel()),
         // ChangeNotifierProvider(create: (_) => LoginWithFacebookViewModel()),
         ChangeNotifierProvider(create: (_) => LoginWithGoogleViewModel()),
-        ChangeNotifierProvider(create: (_) => ValidationModel()),
+        ChangeNotifierProvider(create: (_) => ValidationViewModel()),
         ChangeNotifierProvider(create: (_) => ProfileViewModel()),
         ChangeNotifierProvider(create: (_) => EarnCoinViewModel()),
         ChangeNotifierProvider(create: (_) => EarnCoinRewardViewModel()),
@@ -74,6 +88,11 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => NotificationViewModel()),
         ChangeNotifierProvider(create: (_) => PurchaseCoinViewModel()),
         ChangeNotifierProvider(create: (_) => PurchaseTritCoinViewModel()),
+        ChangeNotifierProvider(create: (_) => GalleryThumbnailProvider()),
+        ChangeNotifierProvider(create: (_) => StatusViewModel()),
+        ChangeNotifierProvider(create: (_) => TransactionViewModel()),
+        ChangeNotifierProvider(create: (_) => AddTravelVendorViewModel()),
+        ChangeNotifierProvider(create: (_) => AgentVendorViewModel()),
       ],
       child: GestureDetector(
         onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
@@ -88,9 +107,11 @@ class MyApp extends StatelessWidget {
             // home: SplashScreen(isLoggedIn: isLoggedIn)),
             home: AuthService.isOnBoarded != 1
                 ? OnboardingScreen()
-                : isLoggedIn
+                : isLoggedIn && role != "agent"
                     ? const BottomNav()
-                    : const LogInScreen()),
+                    : isLoggedIn && role == "agent"
+                        ? const TravelDashboardScreen()
+                        : const LogInScreen()),
       ),
     );
   }

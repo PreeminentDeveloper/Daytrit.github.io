@@ -1,5 +1,6 @@
 import 'package:daytrit/home/components/bottom_nav_bar/bottom_nav.dart';
 import 'package:daytrit/utils/extensions.dart';
+import 'package:daytrit/utils/url_paths.dart';
 import 'package:daytrit/vendor/view/view_models/vendor_view_model.dart';
 import 'package:daytrit/vendor/widgets/custom_button.dart';
 import 'package:daytrit/vendor/widgets/custom_text_form_field.dart';
@@ -21,13 +22,12 @@ class CheckoutScreen extends StatefulWidget {
 }
 
 class _CheckoutScreenState extends State<CheckoutScreen> {
-  var publicKey = 'pk_live_06c535b6e51c9368e08ea619766f5cf0b0c48cbe';
   final plugin = PaystackPlugin();
 
   @override
   void initState() {
     super.initState();
-    plugin.initialize(publicKey: publicKey);
+    plugin.initialize(publicKey: PaystackKey.pubKey);
   }
 
   @override

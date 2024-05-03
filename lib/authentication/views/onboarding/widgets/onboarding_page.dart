@@ -10,9 +10,9 @@ class OnboardingPage extends StatelessWidget {
     required this.title1,
     required this.title2,
     this.title1More = "",
-    required this.subTitle1,
-    required this.subTitle2,
-    required this.packageType,
+    this.subTitle1,
+    this.subTitle2,
+    this.packageType,
     required this.isLogoVisible,
     this.bottonName = "Next",
     this.isTitle1MoreVisible = false,
@@ -20,7 +20,7 @@ class OnboardingPage extends StatelessWidget {
   }) : super(key: key);
 
   final String image;
-  final String title1, title2, title1More, subTitle1, subTitle2, packageType;
+  final String? title1, title2, title1More, subTitle1, subTitle2, packageType;
   final String bottonName;
   final bool isLogoVisible, isTitle1MoreVisible;
   final Function bottonClick;
@@ -50,7 +50,7 @@ class OnboardingPage extends StatelessWidget {
                 getText(
                   context: context,
                   textHeight: 67.3,
-                  title: title1,
+                  title: title1!,
                   weight: FontWeight.w700,
                   fontSize: 70,
                   color: Colors.white,
@@ -60,7 +60,7 @@ class OnboardingPage extends StatelessWidget {
                   child: getText(
                     context: context,
                     textHeight: 67.3,
-                    title: title1More,
+                    title: title1More!,
                     weight: FontWeight.w700,
                     fontSize: 70,
                     color: Colors.white,
@@ -73,65 +73,65 @@ class OnboardingPage extends StatelessWidget {
                     getText(
                       context: context,
                       textHeight: 67.3,
-                      title: title2,
+                      title: title2!,
                       weight: FontWeight.w700,
                       fontSize: 70,
                       color: Colors.white,
                     ),
-                    addHorizontalSpace(3),
-                    Align(
-                      alignment: Alignment.bottomCenter,
-                      child: SizedBox(
-                        height: 43,
-                        child: const VerticalDivider(
-                          color: Colors.white,
-                          thickness: 1,
-                          indent: 10,
-                          endIndent: 0,
-                          width: 0,
-                        ),
-                      ),
-                    ),
-                    addHorizontalSpace(6),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 10),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(
-                            // width: 250,
-                            child: getText(
-                              context: context,
-                              title: subTitle1,
-                              weight: FontWeight.w400,
-                              fontSize: 18,
-                              color: Colors.white,
-                            ),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              getText(
-                                context: context,
-                                title: packageType,
-                                weight: FontWeight.w700,
-                                fontSize: 18,
-                                color: Colors.white,
-                              ),
-                              getText(
-                                context: context,
-                                title: subTitle2,
-                                weight: FontWeight.w400,
-                                fontSize: 18,
-                                color: Colors.white,
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
+                    // addHorizontalSpace(3),
+                    // Align(
+                    //   alignment: Alignment.bottomCenter,
+                    //   child: SizedBox(
+                    //     height: 43,
+                    //     child: const VerticalDivider(
+                    //       color: Colors.white,
+                    //       thickness: 1,
+                    //       indent: 10,
+                    //       endIndent: 0,
+                    //       width: 0,
+                    //     ),
+                    //   ),
+                    // ),
+                    // addHorizontalSpace(6),
+                    // Padding(
+                    //   padding: const EdgeInsets.only(top: 10),
+                    //   child: Column(
+                    //     mainAxisAlignment: MainAxisAlignment.start,
+                    //     crossAxisAlignment: CrossAxisAlignment.start,
+                    //     children: [
+                    //       SizedBox(
+                    //         // width: 250,
+                    //         child: getText(
+                    //           context: context,
+                    //           title: subTitle1!,
+                    //           weight: FontWeight.w400,
+                    //           fontSize: 18,
+                    //           color: Colors.white,
+                    //         ),
+                    //       ),
+                    //       Row(
+                    //         mainAxisAlignment: MainAxisAlignment.start,
+                    //         crossAxisAlignment: CrossAxisAlignment.start,
+                    //         children: [
+                    //           getText(
+                    //             context: context,
+                    //             title: packageType!,
+                    //             weight: FontWeight.w700,
+                    //             fontSize: 18,
+                    //             color: Colors.white,
+                    //           ),
+                    //           getText(
+                    //             context: context,
+                    //             title: subTitle2!,
+                    //             weight: FontWeight.w400,
+                    //             fontSize: 18,
+                    //             color: Colors.white,
+                    //           ),
+                    //         ],
+                    //       ),
+                    //     ],
+                    //   ),
+                    // ),
                   ],
                 ),
               ],

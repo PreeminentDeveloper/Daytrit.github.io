@@ -54,9 +54,7 @@ class ProfileViewModel extends ChangeNotifier {
     }
   }
 
-  Future<Object> logOut({
-    required String email,
-  }) async {
+  Future<Object> logOut() async {
     await AuthService.logout();
     return true;
   }

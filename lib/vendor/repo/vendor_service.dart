@@ -7,13 +7,21 @@ import '../model/vendor_model.dart';
 import 'package:daytrit/utils/network_handler.dart';
 
 class VendorService {
-  Future<ApiResponse> getVendors() async {
+  Future<ApiResponse> getVendors(String? entry) async {
     NetworkHandler networkHandler = NetworkHandler();
     Map<String, dynamic>? decodedData;
+    var response;
 
     try {
-      var response = await networkHandler.getWithToken(VendorUrls.vendorList);
-      decodedData = response;
+      if (entry == "treats") {
+        response = await networkHandler
+            .getWithToken("${VendorUrls.vendorList}?category=treats");
+      } else if (entry == "tourism") {
+        response = await networkHandler
+            .getWithToken("${VendorUrls.vendorList}?category=tourism");
+      } else {
+        response = await networkHandler.getWithToken(VendorUrls.vendorList);
+      }
       List<dynamic> ls = response['data']['data'];
       return Success(data: ls.map((e) => VendorModel.fromJson(e)).toList());
     } on SocketException catch (_) {

@@ -118,40 +118,23 @@ class _PrivacyPolicyScreenState extends State<PrivacyPolicyScreen> {
                             'The right to data portability. You may request that we send\nthis personal data to a third-party, where feasible. You only\nhave this right if it relates to personal data you have provided\nto us where the processing is based on consent or necessity\nfor the performance of a contract between you and\nus, and the processing is conducted by automated means.\n'
                             'You also have the right to lodge a complaint before your national data protection authority.\n'
                             'You will not have to pay a fee to access your personal data (or to exercise any of the other rights described in this\nStatement). However, we may charge a reasonable fee if your\nrequest is clearly unfounded, repetitive or excessive. We may\nneed to request specific information from you to help us\nconfirm your identity and ensure your right to access your\npersonal data (or to exercise any of your other rights). This is a security measure to ensure that personal data is not disclosed to any person who has no right to receive it. In an effort to speed up our response, we may also contact you to ask you for further information in relation to your request. You can exercise several of your rights through the personal information section of your account. To exercise your other rights you can file a request.'
-                        'Information Uses\n'
-                        'We will only use your personal data when the law allows us to,, we will use your personal data in one or more of the following circumstances:\n'
-                        'Where we need to perform the contract we are about to enter into or have entered into with you\n'
-                        'Where it is necessary for our legitimate interests (or those of a third-party) and your interests and fundamental rights do not override those interests\n'
-                        'Where we need to comply with a legal or regulatory obligation\n'
-                        'With your consent\n'
-                        'International Transfers\n'
-                        'Your personal data may be stored or transferred to countries outside the EEA for the purposes described in this Statement. When we store or transfer your personal data outside the EEA, we take the following precautions to ensure that your personal data is properly protected.\n'
-                        'Whenever we store or transfer your personal data outside the EEA, we will do so in accordance with applicable law and we will ensure a similar degree of protection is afforded to it by implementing appropriate safeguards. Transfers of personal data are made:\n'
-                        'to a country recognized by the European Commission as providing an adequate level of protection; or\n'
-                        'to a country which does not offer adequate protection but whose transfer has been governed by the standard contractual clauses of the European Commission or by implementing other appropriate cross-border transfer solutions to provide adequate protection.\n'
-                        'By using our services, you understand that your personal data may be transferred to our facilities and those third-parties with whom we share it as described in this Statement.\n'
-                        'You may request, up to two times each year, that we disclose to you the categories and specific pieces of personal information that we have collected about you, the categories of sources from which your personal information is collected, the business or commercial purpose for collecting your personal information, the categories of personal information that we have disclosed for a business purpose, any categories of personal information about you that we have sold, the categories of third-parties with whom we have shared your personal information, and the business or commercial purpose for selling your personal information, if applicable.\n'
-                        'You may request that we delete any personal information that we have collected from or about you. As described in more detail in our Statement, there are some reasons for which we will not be able to fully address your deletion request, such as if we need to complete a transaction for you, to detect and protect against fraudulent and illegal activity, to exercise our rights, or to comply with a legal obligation.\n'
-                        'You may request to opt out of our sale of your personal information to third-parties for their direct marketing purposes. This means that, if you opt out, going forward, we will not share your information with such third-parties to use for their purposes unless you later direct us to do so. To effect the opt out, please submit a request in writing to contact@daytrit.com\n'
-                        'To take advantage of any of these rights, please contact us at info@daytrit.com. We may need to verify your identity to enable us to process your request. We value your privacy and will not discriminate in response to your exercise of privacy rights. We will respond to your request within 45 days of receipt of your request, after proper verification, unless we need additional time, in which case we will let you know.\n'
-                        ),
+                            'Information Uses\n'
+                            'We will only use your personal data when the law allows us to,, we will use your personal data in one or more of the following circumstances:\n'
+                            'Where we need to perform the contract we are about to enter into or have entered into with you\n'
+                            'Where it is necessary for our legitimate interests (or those of a third-party) and your interests and fundamental rights do not override those interests\n'
+                            'Where we need to comply with a legal or regulatory obligation\n'
+                            'With your consent\n'
+                            'International Transfers\n'
+                            'Your personal data may be stored or transferred to countries outside the EEA for the purposes described in this Statement. When we store or transfer your personal data outside the EEA, we take the following precautions to ensure that your personal data is properly protected.\n'
+                            'Whenever we store or transfer your personal data outside the EEA, we will do so in accordance with applicable law and we will ensure a similar degree of protection is afforded to it by implementing appropriate safeguards. Transfers of personal data are made:\n'
+                            'to a country recognized by the European Commission as providing an adequate level of protection; or\n'
+                            'to a country which does not offer adequate protection but whose transfer has been governed by the standard contractual clauses of the European Commission or by implementing other appropriate cross-border transfer solutions to provide adequate protection.\n'
+                            'By using our services, you understand that your personal data may be transferred to our facilities and those third-parties with whom we share it as described in this Statement.\n'
+                            'You may request, up to two times each year, that we disclose to you the categories and specific pieces of personal information that we have collected about you, the categories of sources from which your personal information is collected, the business or commercial purpose for collecting your personal information, the categories of personal information that we have disclosed for a business purpose, any categories of personal information about you that we have sold, the categories of third-parties with whom we have shared your personal information, and the business or commercial purpose for selling your personal information, if applicable.\n'
+                            'You may request that we delete any personal information that we have collected from or about you. As described in more detail in our Statement, there are some reasons for which we will not be able to fully address your deletion request, such as if we need to complete a transaction for you, to detect and protect against fraudulent and illegal activity, to exercise our rights, or to comply with a legal obligation.\n'
+                            'You may request to opt out of our sale of your personal information to third-parties for their direct marketing purposes. This means that, if you opt out, going forward, we will not share your information with such third-parties to use for their purposes unless you later direct us to do so. To effect the opt out, please submit a request in writing to contact@daytrit.com\n'
+                            'To take advantage of any of these rights, please contact us at info@daytrit.com. We may need to verify your identity to enable us to process your request. We value your privacy and will not discriminate in response to your exercise of privacy rights. We will respond to your request within 45 days of receipt of your request, after proper verification, unless we need additional time, in which case we will let you know.\n'),
                   ]),
-            ),
-          ),
-          Positioned(
-            top: 700,
-
-            // left: 50,
-            right: 30,
-            child: CustomButton(
-              height: 44,
-              width: 114,
-              borderRadius: 8,
-              buttonName: "I Agree",
-              fontSize: 16,
-              fontWeight: FontWeight.w400,
-              buttonColor: AppColours.black,
-              onPressed: () => openSignUpScreen(context),
             ),
           ),
         ],

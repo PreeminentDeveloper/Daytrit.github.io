@@ -2,7 +2,7 @@ import 'package:daytrit/authentication/components/buttons/regular/custom_botton.
 import 'package:daytrit/authentication/components/custom_text/get_text.dart';
 import 'package:daytrit/authentication/components/loader/loader.dart';
 import 'package:daytrit/authentication/components/screen_properties.dart/spaces.dart';
-import 'package:daytrit/authentication/view_models/validation_model.dart';
+import 'package:daytrit/authentication/view_models/validation_view_model.dart';
 import 'package:daytrit/authentication/view_models/verify_email_view_model.dart';
 import 'package:daytrit/utils/constants.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +33,7 @@ class VerificationScreenState extends State<VerificationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final validationViewModel = Provider.of<ValidationModel>(context);
+    final validationViewModel = Provider.of<ValidationViewModel>(context);
     final verifyEmailViewModel = Provider.of<VerifyEmailViewModel>(context);
     return Scaffold(
       backgroundColor: AppColours.white,

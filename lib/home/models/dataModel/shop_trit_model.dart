@@ -16,17 +16,17 @@ class ShopTritModel {
 List<ShopTritModel> shopTrit = [
   ShopTritModel(
       qty: 1000,
+      amount: 1000,
+      coinBoxImage: AppImages.coinBox,
+      coinIcon: AppImages.coinIcon),
+  ShopTritModel(
+      qty: 2000,
       amount: 2000,
       coinBoxImage: AppImages.coinBox,
       coinIcon: AppImages.coinIcon),
   ShopTritModel(
       qty: 3000,
-      amount: 3000,
-      coinBoxImage: AppImages.coinBox,
-      coinIcon: AppImages.coinIcon),
-  ShopTritModel(
-      qty: 6000,
-      amount: 9000,
+      amount: 2500,
       coinBoxImage: AppImages.coinBox,
       coinIcon: AppImages.coinIcon),
 ];

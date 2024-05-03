@@ -60,7 +60,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           width: 94,
                           height: 94,
                           decoration: BoxDecoration(
-                              image: profileModel.userData!.photo != null
+                              image: profileModel.userData?.photo != null
                                   ? DecorationImage(
                                       image: NetworkImage(
                                           "https://daytrit.net${profileModel.userData!.photo}"),
@@ -78,24 +78,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             fontSize: 24,
                             color: AppColours.cream,
                             weight: FontWeight.w400),
-                        addVerticalSpace(12),
+                        addVerticalSpace(8),
                         Padding(
                           padding: const EdgeInsets.only(left: 80.0, right: 80),
                           child: Divider(
                             color: AppColours.cream,
                           ),
                         ),
-                        addVerticalSpace(12),
                         Expanded(
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               getText(
                                   context: context,
-                                  title:
-                                      "${profileModel.uData?.referralCode}" ??
-                                          "",
+                                  title: profileModel.uData?.referralCode ?? "",
                                   fontSize: 12,
+                                  letterSpacing: 3,
                                   color: AppColours.cream2,
                                   weight: FontWeight.w500),
                               addHorizontalSpace(8),
@@ -137,6 +135,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               CustomListTile(
                   onTap: () {
+                    openWalletScreen(context);
+                  },
+                  leading: SvgPicture.asset('assets/svgs/wallet.svg'),
+                  title: 'Wallet'),
+              CustomListTile(
+                  onTap: () {
                     editProfileScreen(context);
                   },
                   leading: Image.asset(AppImages.edit),
@@ -171,8 +175,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               Center(
                 child: TextButton.icon(
                   onPressed: () async {
-                    var data = await profileModel.logOut(
-                        email: profileModel.userData!.email);
+                    var data = await profileModel.logOut();
                     if (data == true) {
                       openLogOut(context);
                     }

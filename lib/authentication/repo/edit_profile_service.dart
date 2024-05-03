@@ -41,17 +41,15 @@ class EditProfileService {
         data,
         file,
       );
-      
-      decodedData = jsonDecode(response.body);
-      
-      return Success(data: userProfileResponseFromMap(response.body));
+
+      return Success(data: UserProfileResponse.fromMap(response));
     } on SocketException catch (_) {
       return EditProfileFailure(
           message: "Kindly, check your internet connection.");
     } on TimeoutException catch (_) {
       return EditProfileFailure(message: "Request Timeout.");
     } catch (e) {
-      return EditProfileFailure(message: "${decodedData?['message']}");
+      return EditProfileFailure(message: "An Error Occurred!");
     }
   }
 }

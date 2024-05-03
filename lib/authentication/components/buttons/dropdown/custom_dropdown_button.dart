@@ -10,11 +10,18 @@ class CustomDropdownButton extends StatelessWidget {
   Color? color;
   Color textColor;
   Color borderColor;
+  final double? borderRadius;
 
   CustomDropdownButton(
-      {Key? key, this.items,this.borderColor =  AppColours.forestLightGreen,
+      {Key? key,
+      this.items,
+      this.borderColor = AppColours.forestLightGreen,
+      this.borderRadius = 8,
       this.textColor = AppColours.darkLemon2,
-      this.color, this.hintText, this.selectedValue, this.onChanged})
+      this.color,
+      this.hintText,
+      this.selectedValue,
+      this.onChanged})
       : super(key: key);
 
   @override
@@ -24,19 +31,18 @@ class CustomDropdownButton extends StatelessWidget {
       child: Container(
         height: 60,
         width: double.infinity,
-        
         decoration: BoxDecoration(
-          color: color,
-            borderRadius: BorderRadius.circular(8),
-            border: Border.all(color:borderColor )),
+            color: color,
+            borderRadius: BorderRadius.circular(borderRadius!),
+            border: Border.all(color: borderColor)),
         child: DropdownButtonHideUnderline(
             child: DropdownButton2(
           buttonPadding: const EdgeInsets.symmetric(horizontal: 15),
           hint: Text(
             "$hintText",
-            style:  TextStyle(
+            style: TextStyle(
                 fontSize: 18,
-                color:textColor,
+                color: textColor,
                 fontFamily: AppConstants.aeonik,
                 fontWeight: FontWeight.w400),
           ),

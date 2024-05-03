@@ -6,10 +6,12 @@ class CustomListTile extends StatelessWidget {
   final String title;
   final Widget? trailing;
   final VoidCallback? onTap;
+  final Color? textColor;
 
   const CustomListTile({
     Key? key,
     this.leading,
+    this.textColor,
     required this.title,
     this.trailing,
     this.onTap,
@@ -20,12 +22,13 @@ class CustomListTile extends StatelessWidget {
     return ListTile(
       leading: leading,
       dense: true,
+      horizontalTitleGap: 5,
       title: getText(
         context: context,
         title: title,
-        weight: FontWeight.w400,
-        fontSize: 18,
-        color: Colors.black,
+        weight: FontWeight.w500,
+        fontSize: 16,
+        color: textColor ?? Colors.black,
       ),
       trailing: trailing,
       onTap: onTap,

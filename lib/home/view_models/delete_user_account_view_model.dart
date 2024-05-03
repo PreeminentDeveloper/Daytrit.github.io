@@ -29,8 +29,7 @@ class DeleteUserAccountViewModel extends ChangeNotifier {
       final profileViewModel =
           Provider.of<ProfileViewModel>(context, listen: false);
       print("Email: ${profileViewModel.userData!.email}");
-      var data = await profileViewModel.logOut(
-          email: profileViewModel.userData!.email);
+      var data = await profileViewModel.logOut();
       print("Logout data: $data");
       if (data == true) {
         openLoginScreen(context);

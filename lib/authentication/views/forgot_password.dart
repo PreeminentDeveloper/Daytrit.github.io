@@ -10,16 +10,16 @@ import 'package:provider/provider.dart';
 
 import '../components/input_field/custom_input_field.dart';
 import '../components/loader/loader.dart';
-import '../view_models/validation_model.dart';
+import '../view_models/validation_view_model.dart';
 
 class ForgotPassword extends StatelessWidget {
   const ForgotPassword({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final validationViewModel = Provider.of<ValidationModel>(context);
+    final validationViewModel = Provider.of<ValidationViewModel>(context);
     final forgotPasswordViewModel =
-    Provider.of<ForgotPasswordViewModel>(context);
+        Provider.of<ForgotPasswordViewModel>(context);
 
     return Scaffold(
       backgroundColor: AppColours.monochromeWhite2,
@@ -55,7 +55,7 @@ class ForgotPassword extends StatelessWidget {
                   RichText(
                     text: TextSpan(
                       text:
-                      'Please fill in the email address registered with your ',
+                          'Please fill in the email address registered with your ',
                       style: TextStyle(
                           fontSize: 17,
                           fontWeight: FontWeight.w400,
@@ -100,12 +100,12 @@ class ForgotPassword extends StatelessWidget {
                           ? AppColours.black
                           : AppColours.lightGrey,
                       onPressed: ()
-                      // => openResetCode(context)
-                      =>
-                      !validationViewModel.isEmalValid
-                          ? null
-                          : validationViewModel
-                          .submitForgotPassword(context)),
+                          // => openResetCode(context)
+                          =>
+                          !validationViewModel.isEmalValid
+                              ? null
+                              : validationViewModel
+                                  .submitForgotPassword(context)),
                 ]),
           ),
         ),

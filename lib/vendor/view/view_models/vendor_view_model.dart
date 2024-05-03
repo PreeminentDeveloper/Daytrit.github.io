@@ -34,12 +34,23 @@ class VendorViewModel extends ChangeNotifier {
   String? errMsg = '';
   bool orderIsSuccess = false;
   bool orderIsFailed = false;
+  bool isPaymentWithTritCoins = false;
+  bool paystackStatus = false;
   String? orderId;
 
   String paystackMessage = '';
+  String? paystackReference = '';
   String? price;
+
   String? customerEmail;
   dynamic formDataResponse;
+
+  int cashPrice = 0;
+
+  getEmail({context}) {
+    final profileModel = Provider.of<ProfileViewModel>(context!, listen: false);
+    customerEmail = profileModel.userData!.email;
+  }
 
   Future<Map<String, dynamic>> makepayment(
       {BuildContext? context,
@@ -47,37 +58,51 @@ class VendorViewModel extends ChangeNotifier {
       bool? isToPurchaceCoin,
       int? amount}) async {
     if (isToPurchaceCoin == true) {
-      print("Coin Purchase");
-      final profileModel =
-          Provider.of<ProfileViewModel>(context!, listen: false);
-      customerEmail = profileModel.userData!.email;
+      print("--- Coin Purchase ---");
+      getEmail(context: context);
       price = amount.toString();
+      cashPrice = int.parse(price!) * 100;
     } else {
+      isToPurchaceCoin = false;
+      print("--- Event application ---");
       formDataResponse = formData();
+      getEmail(context: context);
+      cashPrice = int.parse(price!) * 100;
+      print("FormData Response: $formDataResponse and $customerEmail");
     }
-    int cashPrice = int.parse(price!) * 100;
 
-    Charge charge = Charge()
-      ..amount = cashPrice
-      ..reference = 'Ref_${DateTime.now()}'
-      ..email = customerEmail
-      ..currency = "NGN";
-    CheckoutResponse response = await plugin!.checkout(
-      context!,
-      method: CheckoutMethod.card, // Defaults to CheckoutMethod.selectable
-      charge: charge,
-    );
-    if (response.status == true) {
-      paystackMessage = "Payment was successful. Ref: ${response.reference}";
-      print("Paystack Message: $paystackMessage");
+    print(
+        "isToPurchaceCoin: $isToPurchaceCoin, isPaymentWithTritCoins: $isPaymentWithTritCoins");
+
+    if (isToPurchaceCoin == true || isPaymentWithTritCoins == false) {
+      Charge charge = Charge()
+        ..amount = cashPrice
+        ..reference = 'Ref_${DateTime.now()}'
+        ..email = customerEmail
+        ..currency = "NGN";
+      CheckoutResponse response = await plugin!.checkout(
+        context!,
+        method: CheckoutMethod.card, // Defaults to CheckoutMethod.selectable
+        charge: charge,
+      );
+      paystackStatus = response.status;
+      paystackReference = response.reference;
+      paystackMessage = response.message;
+    } else {
+      return {"isMade": true};
+    }
+    print("paystackStatus: $paystackStatus");
+    isToPurchaceCoin = false;
+    isPaymentWithTritCoins = false;
+
+    if (paystackStatus == true) {
       return {
         "isMade": true,
-        "message": paystackMessage,
-        "paymentReference": response.reference
+        "message": "Payment was successful. Ref: $paystackReference",
+        "paymentReference": paystackReference
       };
     } else {
-      print("Paystack Error: ${response.message}");
-      return {"isMade": false, "message": response.message};
+      return {"isMade": false, "message": paystackMessage};
     }
   }
 
@@ -109,10 +134,11 @@ class VendorViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<bool> getAllVendors() async {
+  Future<bool> getAllVendors({String? entry}) async {
     setLoading(true);
     try {
-      final ApiResponse response = await _vendorService.getVendors();
+      vendors = [];
+      final ApiResponse response = await _vendorService.getVendors(entry);
       if (response is Success) {
         vendors = response.data as List<VendorModel>;
       } else {
@@ -122,21 +148,28 @@ class VendorViewModel extends ChangeNotifier {
       return true;
     } catch (e) {
       setLoading(false);
-      print("HELLO");
       return false;
     }
   }
 
   Map<String, dynamic> formData() {
     Map<String, dynamic> inputData = teCtr?.getData() ?? {};
+    isPaymentWithTritCoins = vendors[selectedVendor].coinPrice == null ||
+            vendors[selectedVendor].coinPrice == '0'
+        ? false
+        : true;
+    print("Coint Price: ${vendors[selectedVendor].coinPrice}");
+    print("Check: $isPaymentWithTritCoins");
     price =
         vendors[selectedVendor].cashPrice ?? vendors[selectedVendor].coinPrice;
+    print("PRICE: $price");
     inputData.addAll({
       'product_id': "${vendors[selectedVendor].id}",
       "amount":
           vendors[selectedVendor].cashPrice ?? vendors[selectedVendor].coinPrice
     });
-    customerEmail = inputData['email'];
+    print("Input Data: $inputData");
+    // getEmail();
     return inputData;
   }
 
@@ -154,6 +187,7 @@ class VendorViewModel extends ChangeNotifier {
       dynamic result = await makepayment(context: context, plugin: plugin);
       print("FORM DATA BEFORE SUBMITTING: $formDataResponse");
       if (result['isMade']) {
+        print("Is Made pay: ${result['isMade']}");
         response = await _vendorService.order(formDataResponse);
         print("FORM DATA AFTER SUBMITTING: $formDataResponse");
       } else {

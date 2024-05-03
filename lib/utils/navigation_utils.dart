@@ -5,14 +5,30 @@ import 'package:daytrit/authentication/views/login_screen.dart';
 import 'package:daytrit/authentication/views/onboarding/screens/terms_and_conditions.dart';
 import 'package:daytrit/authentication/views/reset_code.dart';
 import 'package:daytrit/authentication/views/signup_screen.dart';
+import 'package:daytrit/authentication/views/signup_type.dart';
+import 'package:daytrit/authentication/views/travel_agency/travel_registration.dart';
 import 'package:daytrit/authentication/views/verification_screen.dart';
 import 'package:daytrit/authentication/views/welcome.dart';
 import 'package:daytrit/home/components/bottom_nav_bar/bottom_nav.dart';
 import 'package:daytrit/home/models/dataModel/explore_model.dart';
 import 'package:daytrit/home/view/edit_profile_screen.dart';
 import 'package:daytrit/home/view/explore/video_player/screen/video_payer_screen.dart';
+import 'package:daytrit/home/view/home_screen.dart';
 import 'package:daytrit/home/view/privacy_policy_screen.dart';
 import 'package:daytrit/home/view/profile_screen.dart';
+import 'package:daytrit/home/view/travel/booking_confirmation_screen.dart';
+import 'package:daytrit/home/view/travel/booking_summary.dart';
+import 'package:daytrit/home/view/travel/overview_and_payment_screen.dart';
+import 'package:daytrit/home/view/travel/travelers_details_screen.dart';
+import 'package:daytrit/home/view/travel/trip_screen.dart';
+import 'package:daytrit/home/view/travel/trip_summary_screen.dart';
+import 'package:daytrit/home/view/travel_agency/add_travel_vendor.dart';
+import 'package:daytrit/home/view/travel_agency/travel_dashboard.dart';
+import 'package:daytrit/home/view/travel_agency/travel_order.dart';
+import 'package:daytrit/home/view/travel_agency/travel_profile.dart';
+import 'package:daytrit/home/view/travel_agency/travel_revenue.dart';
+import 'package:daytrit/home/view/travel_agency/travel_vendor.dart';
+import 'package:daytrit/home/view/wallet_screen.dart';
 import 'package:daytrit/utils/constants.dart';
 import 'package:flutter/material.dart';
 
@@ -52,14 +68,64 @@ void openSignUpScreen(BuildContext context) {
       context, MaterialPageRoute(builder: (context) => SignUpScreen()));
 }
 
+void openSignUpType(BuildContext context) {
+  Navigator.push(
+      context, MaterialPageRoute(builder: (context) => SignUpType()));
+}
+
 void openVerificationScreen(BuildContext context) {
   Navigator.pushReplacement(
       context, MaterialPageRoute(builder: (context) => VerificationScreen()));
 }
 
+void openHomeScreen(BuildContext context) {
+  Navigator.pushReplacement(
+      context, MaterialPageRoute(builder: (context) => HomeScreen()));
+}
+
+void openWalletScreen(BuildContext context) {
+  Navigator.push(
+      context, MaterialPageRoute(builder: (context) => WalletScreen()));
+}
+
 void openForgotPassword(BuildContext context) {
   Navigator.push(
       context, MaterialPageRoute(builder: (context) => ForgotPassword()));
+}
+
+void openTravelRegisteration(BuildContext context) {
+  Navigator.push(context,
+      MaterialPageRoute(builder: (context) => TravelRegistrationScreen()));
+}
+
+void openTravelProfileScreen(BuildContext context) {
+  Navigator.push(
+      context, MaterialPageRoute(builder: (context) => TravelProfileScreen()));
+}
+
+void openTravelDashboard(BuildContext context) {
+  Navigator.push(context,
+      MaterialPageRoute(builder: (context) => TravelDashboardScreen()));
+}
+
+void openMyVendor(BuildContext context) {
+  Navigator.push(
+      context, MaterialPageRoute(builder: (context) => TravelVendorScreen()));
+}
+
+void openAddVendor(BuildContext context) {
+  Navigator.push(context,
+      MaterialPageRoute(builder: (context) => AddTravelVendorScreen()));
+}
+
+void openOrder(BuildContext context) {
+  Navigator.push(
+      context, MaterialPageRoute(builder: (context) => TravelOrderScreen()));
+}
+
+void openRevenue(BuildContext context) {
+  Navigator.push(
+      context, MaterialPageRoute(builder: (context) => TravelRevenueScreen()));
 }
 
 void openResetCode(BuildContext context) {
@@ -74,30 +140,72 @@ void openNewPassword(BuildContext context) {
 void openWelcomeScreen(BuildContext context) {
   Navigator.push(
       context, MaterialPageRoute(builder: (context) => const WelcomeScreen()));
-}  
+}
 
 void editProfileScreen(BuildContext context) {
-  Navigator.push(
-      context, MaterialPageRoute(builder: (context) => const EditProfileScreen()));
-}  
+  Navigator.push(context,
+      MaterialPageRoute(builder: (context) => const EditProfileScreen()));
+}
+
 void privacyPolicyScreen(BuildContext context) {
-  Navigator.push(
-      context, MaterialPageRoute(builder: (context) => const PrivacyPolicyScreen()));
-}  
+  Navigator.push(context,
+      MaterialPageRoute(builder: (context) => const PrivacyPolicyScreen()));
+}
+
 void openBottomNavBar(BuildContext context) {
   Navigator.pushReplacement(
       context, MaterialPageRoute(builder: (context) => const BottomNav()));
 }
+
 void openProfileScreen(BuildContext context) {
   Navigator.pushReplacement(
       context, MaterialPageRoute(builder: (context) => const ProfileScreen()));
+}
+
+void openTripScreen(BuildContext context) {
+  Navigator.pushReplacement(
+      context, MaterialPageRoute(builder: (context) => TripScreen()));
+}
+
+void openTripSummaryScreen(BuildContext context) {
+  Navigator.pushReplacement(context,
+      MaterialPageRoute(builder: (context) => const TripSummaryScreen()));
+}
+
+void openTripSummary2Screen(BuildContext context) {
+  Navigator.pushReplacement(context,
+      MaterialPageRoute(builder: (context) => const TripSummaryScreen()));
+}
+
+void openBookingSummaryScreen(BuildContext context) {
+  Navigator.pushReplacement(
+      context, MaterialPageRoute(builder: (context) => const BookingSummary()));
+}
+
+void openTravelersDetailsScreen(BuildContext context) {
+  Navigator.pushReplacement(context,
+      MaterialPageRoute(builder: (context) => const TravelersDetailsScreen()));
+}
+
+void openOverviewAndPaymentScreen(BuildContext context) {
+  Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+          builder: (context) => const OverviewAndPaymentScreen()));
+}
+
+void openBookingConfirmationScreen(BuildContext context) {
+  Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+          builder: (context) => const BookingConfirmationScreen()));
 }
 
 void modalBottomSheetMenu(BuildContext context,
     {required String message,
     required String buttonName,
     required dynamic onPressed}) {
-  showModalBottomSheet(  
+  showModalBottomSheet(
       context: context,
       // isDismissible: false,
       builder: (builder) {

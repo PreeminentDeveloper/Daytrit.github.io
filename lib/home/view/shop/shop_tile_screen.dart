@@ -3,9 +3,11 @@ import 'package:daytrit/authentication/components/custom_text/get_text.dart';
 import 'package:daytrit/authentication/components/screen_properties.dart/spaces.dart';
 import 'package:daytrit/authentication/view_models/edit_profile_view_model.dart.dart';
 import 'package:daytrit/home/models/dataModel/shop_trit_model.dart';
+import 'package:daytrit/home/repo/paystack_integration.dart';
 import 'package:daytrit/home/view_models/purchase_coin_viewmodel.dart';
 import 'package:daytrit/home/view_models/purchase_trit_coin_viewmodel.dart';
 import 'package:daytrit/utils/constants.dart';
+import 'package:daytrit/utils/url_paths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_paystack/flutter_paystack.dart';
 import 'package:provider/provider.dart';
@@ -19,16 +21,8 @@ class ShopTile extends StatefulWidget {
 }
 
 class _ShopTileState extends State<ShopTile> {
-  var publicKey = 'pk_live_06c535b6e51c9368e08ea619766f5cf0b0c48cbe';
-  final plugin = PaystackPlugin();
-
-  @override
-  void initState() {
-    super.initState();
-    plugin.initialize(publicKey: publicKey);
-  }
-
   bool isBuy = false;
+
   @override
   Widget build(BuildContext context) {
     final purchaseCoinViewModel = Provider.of<PurchaseCoinViewModel>(context);
@@ -71,13 +65,12 @@ class _ShopTileState extends State<ShopTile> {
                                 onPressed: () {
                                   purchaseCoinViewModel.purchaseTritCoin(
                                       context,
-                                      plugin: plugin,
                                       amount: widget.shopModel.amount,
                                       qty: widget.shopModel.qty);
                                 }),
                             CustomButton(
                               buttonName: 'No',
-                              onPressed: () {
+                              onPressed: () async {
                                 setState(() {
                                   isBuy = false;
                                 });

@@ -29,7 +29,6 @@ class LoginViewModel extends ChangeNotifier {
   loginUser({data}) async {
     setLoading(true);
     var response = await LoginService.loginUser(data);
-    print("LOGIN RESPONSE: $response");
     if (response is Success) {
       setLoginModel(response.data);
     }

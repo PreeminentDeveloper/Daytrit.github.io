@@ -4,7 +4,8 @@ import '../../utils/size_utils.dart';
 
 class CustomButton extends StatelessWidget {
   CustomButton(
-      {super.key, this.shape,
+      {super.key,
+      this.shape,
       this.padding,
       this.variant,
       this.fontStyle,
@@ -51,7 +52,6 @@ class CustomButton extends StatelessWidget {
   _buildButtonWidget() {
     return GestureDetector(
       onTap: onTap,
-
       child: Container(
         width: getHorizontalSize(width ?? 0),
         margin: margin,
@@ -101,7 +101,7 @@ class CustomButton extends StatelessWidget {
       case ButtonVariant.OutlineGray501:
         return null;
       default:
-        return AppColours.deepOrangeA200;
+        return AppColours.dayTritPrimaryColor;
     }
   }
 

@@ -1,15 +1,16 @@
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:daytrit/authentication/components/buttons/dropdown/custom_dropdown_button.dart';
+import 'package:country_picker/country_picker.dart';
 import 'package:daytrit/authentication/components/custom_text/get_text.dart';
 import 'package:daytrit/authentication/components/input_field/custom_input_field.dart';
 import 'package:daytrit/authentication/components/loader/loader.dart';
 import 'package:daytrit/authentication/components/screen_properties.dart/spaces.dart';
 import 'package:daytrit/authentication/view_models/edit_profile_view_model.dart.dart';
-import 'package:daytrit/authentication/view_models/validation_model.dart';
+import 'package:daytrit/authentication/view_models/validation_view_model.dart';
 import 'package:daytrit/home/view_models/userprofile_view_model.dart';
 import 'package:daytrit/utils/constants.dart';
+import 'package:daytrit/utils/show_file_dialog.dart';
 import 'package:daytrit/utils/size_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -28,7 +29,6 @@ class EditProfileScreen extends StatefulWidget {
 }
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
-  //File? imageTemp;
   File? image;
   final List<String> location = [
     'Nigeria',
@@ -41,11 +41,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   String? selectedStatus;
   @override
   Widget build(BuildContext context) {
-    final validationViewModel = Provider.of<ValidationModel>(context);
+    final validationViewModel = Provider.of<ValidationViewModel>(context);
     final editProfileViewModel = Provider.of<EditProfileViewModel>(context);
     final profileModel = Provider.of<ProfileViewModel>(context);
     return Scaffold(
-      backgroundColor: AppColours.gray50,
+      // backgroundColor: AppColours.gray50,
       appBar: AppBar(
           backgroundColor: AppColours.gray50,
           elevation: 0,
@@ -57,7 +57,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             style: TextStyle(
               color: AppColours.black,
               fontSize: getFontSize(
-                32,
+                25,
               ),
               fontFamily: 'Aeonik',
               fontWeight: FontWeight.w700,
@@ -79,20 +79,22 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                addVerticalSpace(15),
+                // addVerticalSpace(15),
                 Stack(
+                  fit: StackFit.loose,
                   children: [
+                    Container(
+                      height: 110,
+                    ),
                     Center(
                         child: CircleAvatar(
                       radius: 50,
                       backgroundColor: Colors.grey,
-                      child: profileModel.userData!.photo == null
+                      child: profileModel.userData?.photo == null
                           ? CircleAvatar(
                               radius: 50,
                               backgroundColor: AppColours.grey300,
-                              backgroundImage: FileImage(
-                                image!,
-                              ))
+                              backgroundImage: AssetImage(AppImages.avatar))
                           : Container(
                               width: 94,
                               height: 94,
@@ -106,17 +108,17 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             ),
                     )),
                     Positioned(
-                      right: 130,
-                      bottom: 0,
+                      right: 125,
+                      bottom: 10,
                       child: InkWell(
                         onTap: () {
                           selectPhotoBottomsheet(context);
                         },
                         child: CircleAvatar(
-                          radius: 18,
+                          radius: 20,
                           backgroundColor: AppColours.midGreen,
                           child: CircleAvatar(
-                            radius: 16,
+                            radius: 18,
                             backgroundColor: AppColours.lightGreen,
                             child: SvgPicture.asset(
                               AppImages.imgEdit,
@@ -124,10 +126,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           ),
                         ),
                       ),
-                    )
+                    ),
                   ],
                 ),
-                addVerticalSpace(20),
+                addVerticalSpace(10),
                 getText(
                   context: context,
                   title: 'Full Name',
@@ -162,7 +164,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 addVerticalSpace(10),
                 CustomInputField(
                   hintText: profileModel.userData?.email ?? "",
-                  hintColor: AppColours.grey100,
+                  hintColor: AppColours.grey200,
                   fillColor: AppColours.white,
                   isFilledColor: true,
                   style: const TextStyle(
@@ -188,26 +190,94 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   color: Colors.black,
                 ),
                 addVerticalSpace(10),
-                CustomDropdownButton(
-                  borderColor: AppColours.grey100,
-                  color: AppColours.white,
-                  hintText: profileModel.userData?.location ?? "",
-                  textColor: AppColours.grey200,
-                  items: location
-                      .map((item) => DropdownMenuItem<String>(
-                            value: item,
-                            child: getText(
-                                context: context,
-                                title: item,
-                                fontSize: 20,
-                                color: AppColours.black),
-                          ))
-                      .toList(),
-                  selectedValue: validationViewModel.selectedStatus,
-                  onChanged: (dynamic value) =>
-                      validationViewModel.setLocation(value),
+                // CustomDropdownButton(
+                //   borderColor: AppColours.grey100,
+                //   color: AppColours.white,
+                //   hintText: profileModel.userData?.location ?? "",
+                //   textColor: AppColours.grey200,
+                //   items: location
+                //       .map((item) => DropdownMenuItem<String>(
+                //             value: item,
+                //             child: getText(
+                //                 context: context,
+                //                 title: item,
+                //                 fontSize: 20,
+                //                 color: AppColours.black),
+                //           ))
+                //       .toList(),
+                //   selectedValue: validationViewModel.selectedStatus,
+                //   onChanged: (dynamic value) =>
+                //       validationViewModel.setLocation(value),
+                // ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 12),
+                  child: GestureDetector(
+                    onTap: () => showCountryPicker(
+                        context: context,
+                        countryListTheme: CountryListThemeData(
+                          flagSize: 25,
+                          backgroundColor: Colors.white,
+                          textStyle:
+                              TextStyle(fontSize: 16, color: Colors.blueGrey),
+                          bottomSheetHeight:
+                              500, // Optional. Country list modal height
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(20.0),
+                            topRight: Radius.circular(20.0),
+                          ),
+                          inputDecoration: InputDecoration(
+                            hintText: 'Search Country',
+                            prefixIcon: const Icon(Icons.search),
+                            prefixIconColor: AppColours.officialColor,
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide(
+                                  color:
+                                      AppColours.officialColor), //<-- SEE HERE
+                            ),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide:
+                                  BorderSide(color: AppColours.officialColor),
+                            ),
+                          ),
+                        ),
+                        onSelect: (Country country) {
+                          selectedStatus = country.displayName;
+                          validationViewModel.setLocation(country.displayName);
+                        }),
+                    child: Container(
+                        height: 50,
+                        width: double.infinity,
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                        decoration: BoxDecoration(
+                            // color: AppColours.black,
+                            borderRadius: BorderRadius.circular(8),
+                            border:
+                                Border.all(color: AppColours.forestLightGreen)),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              validationViewModel.selectedStatus ??
+                                  profileModel.userData?.location,
+                              style: TextStyle(
+                                  color:
+                                      validationViewModel.selectedStatus == null
+                                          ? AppColours.grey200
+                                          : AppColours.black,
+                                  fontSize: 18),
+                            ),
+                            Icon(
+                              Icons.keyboard_arrow_down_outlined,
+                              color: AppColours.darkLemon2,
+                            )
+                          ],
+                        )),
+                  ),
                 ),
-                addVerticalSpace(15),
+                addVerticalSpace(5),
                 getText(
                   context: context,
                   title: 'Phone Number',
@@ -242,9 +312,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   height: 52,
                   width: double.infinity,
                   buttonColor: Colors.red,
-                  onPressed: () => !validationViewModel.isEditProfileValid
-                      ? null
-                      : validationViewModel.submitEditProfile(context),
+                  onPressed: () =>
+                      validationViewModel.submitEditProfile(context),
                 )
               ],
             ),
@@ -256,7 +325,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
   void selectPhotoBottomsheet(BuildContext context) {
     final validationViewModel =
-        Provider.of<ValidationModel>(context, listen: false);
+        Provider.of<ValidationViewModel>(context, listen: false);
     showModalBottomSheet(
       context: context,
       shape: const RoundedRectangleBorder(
@@ -266,98 +335,45 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         ),
       ),
       builder: (ctx) {
-        return Padding(
-          padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: InkWell(
-                  onTap: () async {
-                    Navigator.pop(ctx);
-                    try {
-                      final image = await ImagePicker()
-                          .pickImage(source: ImageSource.camera);
-                      if (image == null) return;
-                      final imageTemp = File(image.path);
-                      validationViewModel.submitUploadImage(
-                        context,
-                        imageTemp,
-                      );
-                      setState(() {
-                        this.image = imageTemp;
-                        log('hiim ${imageTemp.toString()}');
-                      });
-                    } on PlatformException catch (e) {
-                      log('Failed to pick image: $e');
-                    }
-                  },
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      getText(
-                        context: context,
-                        title: 'Open Camera',
-                        weight: FontWeight.w400,
-                        fontSize: 18,
-                        color: Colors.black,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              addVerticalSpace(15),
-              Divider(color: AppColours.grey100),
-              addVerticalSpace(15),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: InkWell(
-                  onTap: () async {
-                    Navigator.pop(ctx);
-                    try {
-                      final image = await ImagePicker()
-                          .pickImage(source: ImageSource.gallery);
-                      if (image == null) return;
-                      final imageTemp = File(image.path);
-                      validationViewModel.submitUploadImage(
-                        context,
-                        imageTemp,
-                      );
-                      setState(() {
-                        this.image = imageTemp;
-                        log('hiim ${imageTemp.toString()}');
-                      });
-                    } on PlatformException catch (e) {
-                      print('Failed to pick image: $e');
-                    }
-                  },
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      getText(
-                        context: context,
-                        title: 'Open Gallery',
-                        weight: FontWeight.w400,
-                        fontSize: 18,
-                        color: Colors.black,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-
-              // Padding(
-              //   padding: const EdgeInsets.symmetric(horizontal: 10),
-              //   child: BorderButton(
-              //     label: 'Cancel',
-              //     onTap: () {
-              //       Navigator.pop(ctx);
-              //     },
-              //   ),
-              // )
-            ],
-          ),
+        return ShowFileDialog(
+          onTapCamera: () async {
+            Navigator.pop(ctx);
+            try {
+              final image =
+                  await ImagePicker().pickImage(source: ImageSource.camera);
+              if (image == null) return;
+              final imageTemp = File(image.path);
+              validationViewModel.submitUploadImage(
+                context,
+                imageTemp,
+              );
+              setState(() {
+                this.image = imageTemp;
+                log('hiim ${imageTemp.toString()}');
+              });
+            } on PlatformException catch (e) {
+              log('Failed to pick image: $e');
+            }
+          },
+          onTapGallery: () async {
+            Navigator.pop(ctx);
+            try {
+              final image =
+                  await ImagePicker().pickImage(source: ImageSource.gallery);
+              if (image == null) return;
+              final imageTemp = File(image.path);
+              validationViewModel.submitUploadImage(
+                context,
+                imageTemp,
+              );
+              setState(() {
+                this.image = imageTemp;
+                log('hiim ${imageTemp.toString()}');
+              });
+            } on PlatformException catch (e) {
+              print('Failed to pick image: $e');
+            }
+          },
         );
       },
     );

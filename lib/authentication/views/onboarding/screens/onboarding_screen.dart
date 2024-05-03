@@ -22,8 +22,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   _storeOnBoardingInfo() async {
     //is view is set to 1 (user have viewed onboarding)
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setInt("onBoarding",1);
-
+    await prefs.setInt("onBoarding", 1);
   }
 
   @override
@@ -39,18 +38,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   image: AppImages.onboardingImage1,
                   title1: "Travel the",
                   title2: "world",
-                  subTitle1: "with your",
-                  packageType: "FREE ",
-                  subTitle2: '"Trit" coins',
-                  bottonClick: () => nextPage()),
-              OnboardingPage(
-                  isLogoVisible: false,
-                  image: AppImages.onboardingImage2,
-                  title1: "Watch",
-                  title2: "Ads",
-                  subTitle1: "watch Ads to earn",
-                  packageType: "FREE ",
-                  subTitle2: '"Trit" coins',
+                  // subTitle1: "with your",
+                  // packageType: "FREE ",
+                  // subTitle2: '"Trit" coins',
                   bottonClick: () => nextPage()),
               OnboardingPage(
                   isLogoVisible: false,
@@ -59,9 +49,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   title1More: "now, pay",
                   isTitle1MoreVisible: true,
                   title2: "later",
-                  subTitle1: "with your",
-                  packageType: "PREMIUM ",
-                  subTitle2: 'account',
+                  // subTitle1: "with your",
+                  // packageType: "PREMIUM ",
+                  // subTitle2: 'account',
                   bottonName: "Get Started",
                   bottonClick: () async {
                     await _storeOnBoardingInfo();

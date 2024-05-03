@@ -10,6 +10,11 @@ class AuthService {
     await storage.write(key: "token", value: accesToken);
   }
 
+  static storeRole(role) async {
+    const storage = FlutterSecureStorage();
+    await storage.write(key: "role", value: role);
+  }
+
   static storeLoggedInUser() async {
     final prefs = await SharedPreferences.getInstance();
     prefs.setBool("isLoggedIn", true);
@@ -18,6 +23,11 @@ class AuthService {
   static Future<bool> getLoggedInUser() async {
     final prefs = await SharedPreferences.getInstance();
     return prefs.getBool("isLoggedIn") ?? false;
+  }
+
+  static Future<String> getRole() async {
+    const storage = FlutterSecureStorage();
+    return await storage.read(key: "role") ?? "";
   }
 
   static Future<String> getAccessToken() async {
@@ -29,6 +39,7 @@ class AuthService {
     const storage = FlutterSecureStorage();
     final prefs = await SharedPreferences.getInstance();
     storage.delete(key: "token");
+    storage.delete(key: "role");
     prefs.remove("isLoggedIn");
     // var result = continueWithGoogleLogout();
     // print("RESULT:: $result");

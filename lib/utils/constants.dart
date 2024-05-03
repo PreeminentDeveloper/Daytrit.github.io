@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 // fonts
 class AppConstants {
   static const String aeonik = 'Aeonik';
 }
 
-// custom colors
+// fonts
+class Numberformatter {
+  var formatter = NumberFormat('#,##,000');
+}
+
+// custom colorsE1FEB6
 class AppColours {
   static const Color dayTritBlue = Color.fromRGBO(0, 180, 216, 1);
 
@@ -47,11 +53,15 @@ class AppColours {
 
   static const Color grey4 = Color.fromRGBO(217, 217, 217, 1);
 
+  static const Color grey5 = Color.fromRGBO(119, 119, 119, 1);
+
   static const Color darkGrey = Color.fromRGBO(71, 71, 71, 1);
 
   static const Color lightGrey = Color.fromRGBO(128, 128, 128, 1);
 
   static const Color black = Color.fromRGBO(0, 0, 0, 1);
+
+  static const Color black2 = Color.fromRGBO(33, 47, 73, 1);
 
   static const Color white = Color.fromRGBO(255, 255, 255, 1);
 
@@ -97,12 +107,18 @@ class AppColours {
 
   static const Color darkLemon3 = Color.fromRGBO(96, 119, 152, 1);
 
+  static const Color darkLemon4 = Color.fromRGBO(50, 50, 49, 1);
+
   static const Color darkNude = Color.fromRGBO(201, 198, 195, 1);
+
+  static const Color darkNude2 = Color.fromRGBO(201, 198, 195, 0.2);
+
+  static const Color darkNude3 = Color.fromRGBO(201, 198, 195, 0.5);
 
   static Color deepOrangeA200 = fromHex('#ff6433');
 
   static Color gray90099 = fromHex('#99162802');
-
+  static Color blue200 = fromHex('#B3D2FE');
   static Color gray50 = fromHex('#fbf8f4');
 
   static Color red100 = fromHex('#ffd8cc');
@@ -125,19 +141,22 @@ class AppColours {
   static Color deepOrangeA400 = fromHex('#ff3d00');
 
   static Color redA700 = fromHex('#ff0000');
-
+  static Color blackGrey = fromHex('#9591B5');
+  static Color red200 = fromHex('#FF8B66');
   static Color black90026 = fromHex('#26000000');
 
   static Color gray600 = fromHex('#777777');
 
   static Color gray501 = fromHex('#979592');
 
+  static Color lemon1 = fromHex('#E1FEB6');
   static Color gray601 = fromHex('#839862');
 
   static Color gray700 = fromHex('#646362');
 
   static Color gray500 = fromHex('#a2a99a');
-
+  static Color grey800 = fromHex('#D9D9D9');
+  static Color grey900 = fromHex('#474747');
   static Color bluegray90099 = fromHex('#99202833');
 
   static Color grey100 = fromHex('#B8BBD4');
@@ -145,12 +164,19 @@ class AppColours {
   static Color grey200 = fromHex('#6C6C6C');
 
   static Color grey300 = fromHex('#E0E6EB');
+  static Color grey600 = fromHex('#94A3B8');
   static Color gray901 = fromHex('#162802');
-
+  static Color blueGrey = fromHex('#ECF4FF');
+  static Color blueGrey2 = fromHex('#EFEEEE');
+  static Color blueGrey3 = fromHex('#809FCB');
   static Color amber500 = fromHex('#ffca08');
 
   static Color gray701 = fromHex('#565656');
-
+  static Color grey700 = fromHex('#BFBFBF');
+  static Color nudeGrey = fromHex('#EDEDED');
+  static Color grey400 = fromHex('#C9C6C3');
+  static Color grey500 = fromHex('#808080');
+  static Color grey702 = fromHex('#C3C3C3');
   static Color black9006c = fromHex('#6c000000');
 
   static Color gray900 = fromHex('#362312');
@@ -187,6 +213,7 @@ class AppImages {
   // app logo
   static const String dayTritLogo = 'assets/images/daytrit_logo.png';
   static const String dayTritBlueLogo = 'assets/images/daytrit_blue_logo.png';
+  static const String dayTritWhiteLogo = 'assets/images/daytrit_white_logo.png';
   static const String dayTritLogoName = 'assets/images/daytrit_name_logo.png';
   static const String dayTritOfficialLogoNameWhite =
       'assets/images/daytrit_official_name_logo_white.png';
@@ -220,6 +247,7 @@ class AppImages {
   static const String playIcon = 'assets/images/play_icon.png';
   static const String check = 'assets/images/check.png';
   static const String roundGrace = 'assets/images/round_grace.png';
+  static const String roadTrip = 'assets/images/road_trip.png';
 
   //------------------ TEEZCODES ------------------
   static const String homeIcon = 'assets/svgs/home.svg';

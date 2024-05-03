@@ -32,6 +32,11 @@ class EditProfileFailure {
   EditProfileFailure({this.message});
 }
 
+class AddTravelVendorFailure {
+  String? message;
+  AddTravelVendorFailure({this.message});
+}
+
 class PurchaseCoinFailure {
   String? message;
   PurchaseCoinFailure({this.message});
@@ -67,4 +72,16 @@ class NotifcationFetchFailure extends ApiResponse {
   @override
   String? message;
   NotifcationFetchFailure({this.message});
+}
+
+class StatusFetchFailure extends ApiResponse {
+  @override
+  String? message;
+  StatusFetchFailure({this.message});
+}
+
+class TransactionFetchFailure extends ApiResponse {
+  @override
+  String? message;
+  TransactionFetchFailure({this.message});
 }
